@@ -11,12 +11,23 @@ public class SpringAnnontationDemo {
 				new ClassPathXmlApplicationContext("applicationcontext.xml");
 		
 		//get the bean	
-	//	Coach theCoach = context.getBean("SillyCoach", Coach.class);
+		TennisCoach theCoach = context.getBean("SillyCoach", TennisCoach.class);
 		//default bean id
-		Coach theCoach = context.getBean("soccerCoach", Coach.class);
+		Coach theCoach1 = context.getBean("soccerCoach", Coach.class);
 		
 		//call methods on bean
 		System.out.println(theCoach.getDailyWorkout());
+		
+		System.out.println(theCoach.getDailyFortune());
+		
+		//value injection
+		System.out.println(theCoach.getEmail());
+		
+		//setter autowiring
+		System.out.println("---- SoccerCoach ----");
+		System.out.println(theCoach1.getDailyWorkout());
+		
+		System.out.println(theCoach1.getDailyFortune());
 		
 		//close context
 		context.close();
