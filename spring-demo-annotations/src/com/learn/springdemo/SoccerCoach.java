@@ -1,12 +1,17 @@
 package com.learn.springdemo;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 
 //for default bean id...sam as class with first letter as lower class
 @Component
+//@Scope("prototype")
 public class SoccerCoach implements Coach {
 	
 	private FortuneService FortuneService;
@@ -14,6 +19,18 @@ public class SoccerCoach implements Coach {
 	public SoccerCoach() {
 		super();
 		System.out.println("Inside SoccerCoach :no-arg default constructor");
+	}
+	
+	//define my init method
+	@PostConstruct
+	public void doMyStratupStuff() {
+		System.out.println("Inside SoccerCoach :doMyStratupStuff method");
+	}
+	
+	//define my destroy method
+	@PreDestroy
+	public void doMyCleanupStuff() {
+		System.out.println("Inside SoccerCoach :doMyCleanupStuff method");
 	}
 
 	//define setter method
