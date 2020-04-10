@@ -1,12 +1,13 @@
 package com.luv2code.aopdemo.aspect;
 
-
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
+
+import com.luv2code.aop.Account;
 
 @Aspect
 @Component
@@ -32,12 +33,28 @@ public class MyDemoLoggingAspect {
 
 	//Applying pointcut to advices 
 	@Before("com.luv2code.aopdemo.aspect.LuvAopExpressions.inclusiveNoGetterSetter()")
-	public void beforeAddAccountAdvice()
+	public void beforeAddAccountAdvice(JoinPoint joinpoint)
 	{
 		System.out.println("\n=======>>> Executing @Before Advice(\"execution(public void addAccount()\")  <=====");
 		
-	
-	
+		//display method signature
+		MethodSignature methodSignature = (MethodSignature) joinpoint.getSignature();
+		System.out.println("methodSignature: "+methodSignature);
+		
+		//display method arguements
+		Object[] args = joinpoint.getArgs();
+		
+		for(Object temp:args)
+		{
+			System.out.println(temp);
+			if(temp instanceof Account)
+			{
+				//downcast
+				Account account= (Account)temp;
+				System.out.println("account name:..."+account.getName());
+				System.out.println("account level:..."+account.getLevel());
+			}
+		}
 	}
 	
 
