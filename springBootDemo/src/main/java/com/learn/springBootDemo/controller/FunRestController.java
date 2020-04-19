@@ -11,7 +11,7 @@ public class FunRestController {
 	@GetMapping("/")
 	public String sayHello()
 	{
-		return "Hello World"+LocalDateTime.now();
+		return "Hello World to you at timestamp: "+LocalDateTime.now();
 	}
 
 }
